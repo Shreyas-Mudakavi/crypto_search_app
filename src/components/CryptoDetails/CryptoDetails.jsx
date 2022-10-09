@@ -11,7 +11,6 @@ import {
   StopOutlined,
   TrophyOutlined,
   NumberOutlined,
-  ThunderboltOutlined,
   CheckOutlined,
 } from "@ant-design/icons";
 import { useGetCryptoDetailsQuery } from "../../services/cryptoApi";
@@ -36,11 +35,11 @@ const CryptoDetails = () => {
       icon: <DollarCircleOutlined />,
     },
     { title: "Rank", value: cryptoDetails?.rank, icon: <NumberOutlined /> },
-    {
-      title: "24h Volume",
-      value: `$ ${cryptoDetails?.volume && millify(cryptoDetails?.volume)}`,
-      icon: <ThunderboltOutlined />,
-    },
+    // {
+    //   title: "24h Volume",
+    //   value: `$ ${cryptoDetails?.volume && millify(cryptoDetails?.volume)}`,
+    //   icon: <ThunderboltOutlined />,
+    // },
     {
       title: "Market Cap",
       value: `$ ${
