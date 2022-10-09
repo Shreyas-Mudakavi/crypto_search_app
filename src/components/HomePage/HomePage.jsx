@@ -6,6 +6,7 @@ import millify from "millify";
 import Cryptocurrencies from "./../Cryptocurrencies/Cryptocurrencies";
 
 import News from "./../News/News";
+import Loader from "../Loader/Loader";
 
 const HomePage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
@@ -14,7 +15,7 @@ const HomePage = () => {
   // console.log(data);
 
   if (isFetching) {
-    return "Loading...";
+    return <Loader />;
   }
 
   return (

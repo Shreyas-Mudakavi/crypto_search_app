@@ -3,6 +3,7 @@ import { Select, Typography, Row, Col, Avatar, Card } from "antd";
 import moment from "moment";
 import { useGetCryptoNewsQuery } from "../../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../../services/cryptoApi";
+import Loader from "../Loader/Loader";
 
 const News = ({ simplified }) => {
   const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
@@ -18,7 +19,7 @@ const News = ({ simplified }) => {
   // console.log(cryptoNews);
 
   if (isFetching) {
-    return "Loading...";
+    return <Loader />;
   }
 
   return (

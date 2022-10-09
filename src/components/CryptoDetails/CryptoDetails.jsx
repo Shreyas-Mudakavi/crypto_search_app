@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
 import millify from "millify";
-import { Col, Row, Typography, Select } from "antd";
+import { Col, Row, Typography } from "antd";
 import {
   MoneyCollectOutlined,
   DollarCircleOutlined,
@@ -15,20 +15,19 @@ import {
   CheckOutlined,
 } from "@ant-design/icons";
 import { useGetCryptoDetailsQuery } from "../../services/cryptoApi";
+import Loader from "../Loader/Loader";
 
 const CryptoDetails = () => {
   const { coinId } = useParams();
-  const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+
   const cryptoDetails = data?.data?.coin;
 
-  console.log(data);
-
   if (isFetching) {
-    return "Loading...";
+    return <Loader />;
   }
 
-  const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
+  // const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
   const stats = [
     {
@@ -107,17 +106,6 @@ const CryptoDetails = () => {
           market cap and supply.
         </p>
       </Col>
-      <Select
-        defaultValue="7d"
-        className="select-timeperiod"
-        placeholder="Select Time Period"
-        onChange={(value) => setTimePeriod(value)}
-      >
-        {time.map((date) => (
-          <Select.Option key={date}>{date}</Select.Option>
-        ))}
-      </Select>
-      {/* line chart */}
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
@@ -130,7 +118,7 @@ const CryptoDetails = () => {
             </p>
           </Col>
           {stats.map(({ icon, title, value }) => (
-            <Col className="coin-stats">
+            <Col className="coin-stats" key={title}>
               <Col className="coin-stats-name">
                 <Typography.Text>{icon}</Typography.Text>
                 <Typography.Text>{title}</Typography.Text>
@@ -149,7 +137,7 @@ const CryptoDetails = () => {
             </p>
           </Col>
           {genericStats.map(({ icon, title, value }) => (
-            <Col className="coin-stats">
+            <Col className="coin-stats" key={title}>
               <Col className="coin-stats-name">
                 <Typography.Text>{icon}</Typography.Text>
                 <Typography.Text>{title}</Typography.Text>
